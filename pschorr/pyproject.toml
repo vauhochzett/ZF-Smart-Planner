@@ -6,6 +6,7 @@ authors = ["Anonymous <anon@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+bottle = "^0.12.23"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
