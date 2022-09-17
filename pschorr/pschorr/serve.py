@@ -36,9 +36,22 @@ def index():
     return template("index", title=TITLE)
 
 
-@route("/result/truck")
-def result_truck():
-    """Return the result page (1): truck."""
+@route("/result/truck", method="POST")
+def trip():
+    source: str = request.forms.get("source")
+    dest: str = request.forms.get("dest")
+    unit_size: str = request.forms.get("unit_size")
+    unit_count: str = request.forms.get("unit_count")
+    delivery_from: str = request.forms.get("delivery_from")
+    delivery_to: str = request.forms.get("delivery_to")
+
+    # route: Route = Route(source, dest)
+    # unit_l, unit_b, unit_w = [float(u) for u in unit_size.lower().split("x")]
+    # volume: float = float(unit_count) * unit_l * unit_b * unit_w
+    # delivery_from_dt: dt.date = dt.datetime.strptime(delivery_from, "%Y-%m-%d")
+    # delivery_to_dt: dt.date = dt.datetime.strptime(delivery_to, "%Y-%m-%d")
+
+    # Return the result page (1): truck
     Vehicle = namedtuple("Vehicle", ["id", "type", "size", "health"])
     return template(
         "result-truck",
@@ -80,24 +93,6 @@ def result_summary():
 
 
 ## -- API for frontend -- ##
-
-
-@route("/trip", method="POST")
-def trip():
-    source: str = request.forms.get("source")
-    dest: str = request.forms.get("dest")
-    unit_size: str = request.forms.get("unit_size")
-    unit_count: str = request.forms.get("unit_count")
-    delivery_from: str = request.forms.get("delivery_from")
-    delivery_to: str = request.forms.get("delivery_to")
-
-    route: Route = Route(source, dest)
-    unit_l, unit_b, unit_w = [float(u) for u in unit_size.lower().split("x")]
-    volume: float = float(unit_count) * unit_l * unit_b * unit_w
-    delivery_from_dt: dt.date = dt.datetime.strptime(delivery_from, "%Y-%m-%d")
-    delivery_to_dt: dt.date = dt.datetime.strptime(delivery_to, "%Y-%m-%d")
-
-    raise NotImplementedError()
 
 
 @route("/vehicles", method="POST")
