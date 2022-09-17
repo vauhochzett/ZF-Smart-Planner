@@ -26,7 +26,7 @@
               <input type="text" placeholder="Zurich" class="form-control" name="dest" id="dest">
             </div>
             <div class="mb-3">
-              <label for="unit_size" class="form-label">Unit Size (m)</label>
+              <label for="unit_size" class="form-label">Unit Size</label>
               <input type="text" placeholder="LxBxW" class="form-control" name="unit_size" id="unit_size">
             </div>
             <div class="mb-3">
