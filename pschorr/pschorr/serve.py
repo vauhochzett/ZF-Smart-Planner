@@ -2,7 +2,7 @@
 from pathlib import Path
 from typing import Optional
 
-from bottle import route, run, static_file, template
+from bottle import TEMPLATE_PATH, route, run, static_file, template
 
 # Ensure that static files are accessible
 static_dir: Optional[Path] = None
@@ -12,11 +12,13 @@ for static_path in (search_dirs := ["./static", "../static", "./pschorr/static"]
 if static_dir is None:
     raise IOError(f"Could not find static dir. Searched directories: {search_dirs}")
 
+TEMPLATE_PATH.append(static_dir / "html")
+
 
 @route("/")
 def index():
     """Return the homepage."""
-    return template("<b>Hello, {{ name }}</b>!", name="world")
+    return template("index", title="Hello", name="world")
 
 
 @route("/static/<ext>/<filename>")
