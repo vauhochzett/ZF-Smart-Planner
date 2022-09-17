@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cd pschorr
+poetry run python pschorr/serve.py
