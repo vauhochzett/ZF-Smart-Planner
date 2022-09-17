@@ -1,4 +1,5 @@
 """Main entrypoint to start the server."""
+import datetime as dt
 from collections import namedtuple
 from pathlib import Path
 from typing import Optional
@@ -81,11 +82,21 @@ def result_summary():
 ## -- API for frontend -- ##
 
 
-@route("/drivers", method="POST")
-def drivers():
-    startpoint: str = request.forms.get("startpoint")
-    destination: str = request.forms.get("destination")
-    route: Route = Route(startpoint, destination)
+@route("/trip", method="POST")
+def trip():
+    source: str = request.forms.get("source")
+    dest: str = request.forms.get("dest")
+    unit_size: str = request.forms.get("unit_size")
+    unit_count: str = request.forms.get("unit_count")
+    delivery_from: str = request.forms.get("delivery_from")
+    delivery_to: str = request.forms.get("delivery_to")
+
+    route: Route = Route(source, dest)
+    unit_l, unit_b, unit_w = [float(u) for u in unit_size.lower().split("x")]
+    volume: float = float(unit_count) * unit_l * unit_b * unit_w
+    delivery_from_dt: dt.date = dt.datetime.strptime(delivery_from, "%Y-%m-%d")
+    delivery_to_dt: dt.date = dt.datetime.strptime(delivery_to, "%Y-%m-%d")
+
     raise NotImplementedError()
 
 

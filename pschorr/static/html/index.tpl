@@ -16,7 +16,7 @@
         <div class="col-xl-2"></div>
         <div class="col-xl-8">
           <h1 class="mt-3">Trip Details</h1>
-          <form>
+          <form action="/trip" method="post">
             <div class="mb-3">
               <label for="source" class="form-label">Source</label>
               <input type="text" placeholder="Munich" class="form-control" name="source" id="source">
