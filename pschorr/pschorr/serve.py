@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Optional
 
 from bottle import TEMPLATE_PATH, request, route, run, static_file, template
+from route import Route
 
 # Ensure that static files are accessible
 static_dir: Optional[Path] = None
@@ -34,6 +35,7 @@ def serve_static(ext, filename):
 def drivers():
     startpoint: str = request.forms.get("startpoint")
     destination: str = request.forms.get("destination")
+    route: Route = Route(startpoint, destination)
     raise NotImplementedError()
 
 
