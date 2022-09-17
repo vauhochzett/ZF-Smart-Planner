@@ -31,7 +31,7 @@
                 <td>{{ driver.name }}</td>
                 <td>{{ driver.trips_made }}</td>
                 <td>{{ driver.score }}</td>
-                <td><button type="button" class="btn btn-primary">Select Driver</button></td>
+                <td><a href="/result/summary" class="btn btn-primary" role="button">Select Driver</a></td>
               </tr>
               % end
             </tbody>
