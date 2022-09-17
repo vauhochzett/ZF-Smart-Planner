@@ -57,9 +57,9 @@ def trip():
         "result-truck",
         title=TITLE,
         vehicles=[
-            Vehicle("RAKL136", "BigManCar", "19L x 7W x 7H", "green"),
-            Vehicle("RAKL234", "Taurus232", "22L x 7.5W x 7H", "green"),
-            Vehicle("RAKL544", "TataMotors365", "19L x 7W x 7H", "orange"),
+            Vehicle("5HJW078", "BigManCar", "19L x 7W x 7H", "green"),
+            Vehicle("702-TSS", "Taurus232", "22L x 7.5W x 7H", "green"),
+            Vehicle("PES 193", "TataMotors365", "19L x 7W x 7H", "orange"),
         ],
     )
 
@@ -72,9 +72,9 @@ def result_driver():
         "result-driver",
         title=TITLE,
         drivers=[
-            Driver("Frank Lu", 198, 92),
-            Driver("Valentin Zieglmeier", 192, 86),
-            Driver("Rinkita Mittal", 200, 83),
+            Driver("Sabrina Murray", 198, 92),
+            Driver("Gabriel Gibbs", 192, 86),
+            Driver("Mark Diaz II", 200, 83),
         ],
     )
 
@@ -85,8 +85,8 @@ def result_summary():
     return template(
         "result-summary",
         title=TITLE,
-        driver="Frank Lu",
-        truck="BigManCar",
+        driver="Sabrina Murray",
+        truck="PES 193",
         expected_fuel_savings="1.25 liters",
         expected_co2_savings="1.2 kg",
     )
