@@ -41,6 +41,29 @@
         </div>
         <div class="col-xl-2"></div>
       </div>
+      <div class="row">
+        <h2 class="my-3">Insights</h2>
+        <div class="col-xl-2"></div>
+        <div class="col-sm-6 col-xl-4">
+          <div class="card" style="width: 18rem;">
+            <img src="/static/img/avg_fuel_truck.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Average fuel consumption</h5>
+              <p class="card-text">Comparison of fuel consumption of the trucks.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+          <div class="card" style="width: 18rem;">
+            <img src="/static/img/other_chart.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Wear</h5>
+              <p class="card-text">Wear analysis of truck over last trips.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2"></div>
+      </div>
     </div>
   </body>
 </html>
