@@ -21,4 +21,4 @@ Check out our [showcase on CreatorSpace](https://app.creatorspace.dev/valentin/p
 
 The proof of concept app can be found in the directory [/app](/app). Run it by executing [run](run).
 
-Additionally, the full set of analyses is in the notebook [Analysis.ipynb](Analysis.ipynb).
+Additionally, the full set of analyses is in the notebook [Analysis.ipynb](Analysis.ipynb). (You can view this on GitHub!)
