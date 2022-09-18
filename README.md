@@ -20,7 +20,8 @@ Check out our [showcase on CreatorSpace](https://app.creatorspace.dev/valentin/p
 ## Navigating this repo
 
 The **proof of concept** app can be found in the directory [/app](/app).
-Run it by executing [run](run).
+Install the dependencies with `poetry install`.
+Then, you can run it by executing [run](run).
 
 Additionally, the **full set of analyses** is in the notebook [Analysis.ipynb](Analysis.ipynb). (You can view this on GitHub!)
 It gives recommendations for driver and vehicle selection based on configured criteria.
