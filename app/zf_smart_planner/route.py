@@ -1,5 +1,6 @@
 """Calculate arbitrary routes."""
 
+import itertools
 from enum import Enum
 from typing import Tuple
 
@@ -40,4 +41,7 @@ class Route:
         return _CAR_ROUTER.findNode(latitude, longitude)
 
     def length(self):
-        return 200
+        length: float = 0.0
+        for node, next_node in itertools.pairwise(self.node_ids_list):
+            length += next_node - node
+        return length
