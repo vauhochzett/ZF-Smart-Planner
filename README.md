@@ -16,3 +16,9 @@ Fleet managers – hold onto your butts! The **ZF Smart Planner** is the compreh
 ## Showcase
 
 Check out our [showcase on CreatorSpace](https://app.creatorspace.dev/valentin/projects/XwgKyQu9oNQYtwT5).
+
+## Navigating this repo
+
+The proof of concept app can be found in the directory [/app](/app). Run it by executing [run](run).
+
+Additionally, the full set of analyses is in the notebook [Analysis.ipynb](Analysis.ipynb).
