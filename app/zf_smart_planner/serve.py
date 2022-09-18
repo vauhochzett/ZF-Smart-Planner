@@ -92,16 +92,4 @@ def result_summary():
     )
 
 
-## -- API for frontend -- ##
-
-
-@route("/vehicles", method="POST")
-def vehicles():
-    unit_length: str = request.forms.get("unit_length")
-    unit_width: str = request.forms.get("unit_width")
-    unit_height: str = request.forms.get("unit_height")
-    unit_count: str = request.forms.get("unit_count")
-    raise NotImplementedError()
-
-
 run(host="localhost", port=8975)
