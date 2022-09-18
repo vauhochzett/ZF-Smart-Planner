@@ -38,3 +38,6 @@ class Route:
         latitude: str = nominatim_r["lat"]
         longitude: str = nominatim_r["lon"]
         return _CAR_ROUTER.findNode(latitude, longitude)
+
+    def length(self):
+        return 200
