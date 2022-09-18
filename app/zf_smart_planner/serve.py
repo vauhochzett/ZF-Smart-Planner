@@ -45,11 +45,12 @@ def trip():
     delivery_from: str = request.forms.get("delivery_from")
     delivery_to: str = request.forms.get("delivery_to")
 
-    # route: Route = Route(source, dest)
-    # unit_l, unit_b, unit_w = [float(u) for u in unit_size.lower().split("x")]
-    # volume: float = float(unit_count) * unit_l * unit_b * unit_w
-    # delivery_from_dt: dt.date = dt.datetime.strptime(delivery_from, "%Y-%m-%d")
-    # delivery_to_dt: dt.date = dt.datetime.strptime(delivery_to, "%Y-%m-%d")
+    route: Route = Route(source, dest)
+    length: float = route.length()
+    unit_l, unit_b, unit_w = [float(u) for u in unit_size.lower().split("x")]
+    volume: float = float(unit_count) * unit_l * unit_b * unit_w
+    delivery_from_dt: dt.date = dt.datetime.strptime(delivery_from, "%Y-%m-%d")
+    delivery_to_dt: dt.date = dt.datetime.strptime(delivery_to, "%Y-%m-%d")
 
     # Return the result page (1): truck
     Vehicle = namedtuple("Vehicle", ["id", "type", "size", "health"])
