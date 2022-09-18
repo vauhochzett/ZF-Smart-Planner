@@ -3,6 +3,15 @@ from collections import namedtuple
 import numpy as np
 import util
 
+# import matplotlib.pyplot as plt
+from scipy.signal import savgol_filter
+
+
+def get_xy(y, start=0, end=-1, smoothen=True):
+    y = np.array(y)
+    x = np.arange(start, start + len(y) if end < 0 else end)
+    return x, savgol_filter(y, 7, 3) if smoothen else y
+
 
 class ZFDataHandler:
     def __init__(self):
@@ -132,6 +141,29 @@ class ZFDataHandler:
             )
 
         return expected_avgfuel100 / similarity_sum
+
+    def select_id_rows(self, id_, key_):
+        return self.ZF_DATA[self.ZF_DATA[key_] == id_]
+
+    def select_driver(self, driverid):
+        return self.select_id_rows(driverid, self.KEYS.DriverID)
+
+    def select_vehicle(self, vehicleid):
+        return self.select_id_rows(vehicleid, self.KEYS.VehicleID)
+
+    def get_num_trips(self, driver_id):
+        return len(self.select_driver(driver_id))
+
+    def get_driver_score(self, driver_id):
+        driver_avg100 = self.select_driver(driver_id)[
+            self.KEYS.AvgFuelConsumption_per100km
+        ].mean()
+
+        return int(
+            driver_avg100
+            / self.ZF_DATA[self.KEYS.AvgFuelConsumption_per100km].mean()
+            * 100
+        )
 
 
 zfhandler = ZFDataHandler()

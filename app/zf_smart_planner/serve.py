@@ -77,16 +77,17 @@ def result_driver(vehicle_id):
     best_driver_ids = zfhandler.get_driver(
         [zfhandler.KEYS.AvgFuelConsumption_per100km], top_k=3
     )
+    drivers = [
+        Driver(
+            zfhandler.DRIVERID2NAME[driver_id],
+            zfhandler.get_num_trips(driver_id),
+            zfhandler.get_driver_score(driver_id),
+        )
+        for driver_id in best_driver_ids
+    ]
 
     return template(
-        "result-driver",
-        title=TITLE,
-        drivers=[
-            Driver("Sabrina Murray", 198, 92),
-            Driver("Gabriel Gibbs", 192, 86),
-            Driver("Mark Diaz II", 200, 83),
-        ],
-        vehicle_id=vehicle_id,
+        "result-driver", title=TITLE, drivers=drivers, vehicle_id=vehicle_id,
     )
 
 
