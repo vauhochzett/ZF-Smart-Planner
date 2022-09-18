@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cd pschorr
-poetry run python pschorr/serve.py
+cd app
+poetry run python zf_smart_planner/serve.py
