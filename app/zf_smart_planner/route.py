@@ -33,10 +33,10 @@ class Route:
     @staticmethod
     def _resolve_query(search_string: str):
         """Resolve search string to routing node."""
-        nominatim_r_str = requests.get(_NOMINATIM_BASE_URL + f"q={search_string}")
-        nominatim_r = nominatim_r_str.json()
-        latitude: str = nominatim_r["lat"]
-        longitude: str = nominatim_r["lon"]
+        api_response = requests.get(_NOMINATIM_BASE_URL + f"q={search_string}")
+        response_data = api_response.json()
+        latitude: float = float(response_data[0]["lat"])
+        longitude: float = float(response_data[0]["lon"])
         return _CAR_ROUTER.findNode(latitude, longitude)
 
     def length(self):
