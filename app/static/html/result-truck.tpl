@@ -33,7 +33,7 @@
                 <td>{{ vehicle.type }}</td>
                 <td>{{ vehicle.size }}</td>
                 <td>{{ vehicle.health }}</td>
-                <td><a href="/result/driver" class="btn btn-primary" role="button">Select Vehicle</a></td>
+                <td><a href="/result/driver/{{vehicle.id}}" class="btn btn-primary" role="button">Select Vehicle</a></td>
               </tr>
               % end
             </tbody>

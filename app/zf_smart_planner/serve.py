@@ -4,18 +4,17 @@ from collections import namedtuple
 from pathlib import Path
 from typing import Optional
 
-from bottle import TEMPLATE_PATH, request, route, run, static_file, template
+from bottle import TEMPLATE_PATH, request, route, run, static_file, template, response
 from route import Route
+from datalib import zfhandler
+import random
+import util
 
 # Ensure that static files are accessible
-static_dir: Optional[Path] = None
-for static_path in (search_dirs := ["./static", "../static", "./pschorr/static"]):
-    if (the_dir := Path(static_path)).exists():
-        static_dir = the_dir
-if static_dir is None:
-    raise IOError(f"Could not find static dir. Searched directories: {search_dirs}")
+static_dir: Optional[Path] = util.load_static("static")
 
 TEMPLATE_PATH.append(static_dir / "html")
+
 
 # Globals
 TITLE = "🚚 ZF Smart Planner"
@@ -54,21 +53,31 @@ def trip():
 
     # Return the result page (1): truck
     Vehicle = namedtuple("Vehicle", ["id", "type", "size", "health"])
-    return template(
-        "result-truck",
-        title=TITLE,
-        vehicles=[
-            Vehicle("5HJW078", "BigManCar", "19L x 7W x 7H", "green"),
-            Vehicle("702-TSS", "Taurus232", "22L x 7.5W x 7H", "green"),
-            Vehicle("PES 193", "TataMotors365", "19L x 7W x 7H", "orange"),
-        ],
+    best_vehicle_ids = zfhandler.get_vehicle(
+        [zfhandler.KEYS.AvgFuelConsumption_per100km], top_k=3
     )
+    load = ["19L x 7W x 7H", "22L x 7.5W x 7H", "19L x 7W x 7H"]
+    colors = 10 * ["green"] + 4 * ["orange"] + 3 * ["red"]
+    vehicles = [
+        Vehicle(
+            vid,
+            zfhandler.VEHICLEID2PLATE[vid],
+            random.choice(load),
+            random.choice(colors),
+        )
+        for vid in best_vehicle_ids
+    ]
+    return template("result-truck", title=TITLE, vehicles=vehicles,)
 
 
-@route("/result/driver")
-def result_driver():
+@route("/result/driver/<vehicle_id>")
+def result_driver(vehicle_id):
     """Return the result page (2): driver."""
     Driver = namedtuple("Driver", ["name", "trips_made", "score"])
+    best_driver_ids = zfhandler.get_driver(
+        [zfhandler.KEYS.AvgFuelConsumption_per100km], top_k=3
+    )
+
     return template(
         "result-driver",
         title=TITLE,
@@ -77,17 +86,19 @@ def result_driver():
             Driver("Gabriel Gibbs", 192, 86),
             Driver("Mark Diaz II", 200, 83),
         ],
+        vehicle_id=vehicle_id,
     )
 
 
-@route("/result/summary")
-def result_summary():
+@route("/result/summary/<vehicle_id>/<driver_id>")
+def result_summary(vehicle_id, driver_id):
     """Return the result page (3): summary."""
+
     return template(
         "result-summary",
         title=TITLE,
-        driver="Sabrina Murray",
-        truck="PES 193",
+        driver=driver_id,
+        truck=vehicle_id,
         expected_fuel_savings="1.25 liters",
         expected_co2_savings="1.2 kg",
     )

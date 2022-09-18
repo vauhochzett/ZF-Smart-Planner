@@ -1,11 +1,13 @@
 import pandas as pd
 from collections import namedtuple
 import numpy as np
+import util
 
 
 class ZFDataHandler:
     def __init__(self):
-        self.ZF_DATA = pd.read_csv("../Data/Export_data_ZF_ts.csv")
+        fp = util.load_static("Data") / "Export_data_ZF_ts.csv"
+        self.ZF_DATA = pd.read_csv(fp)
         self.ZF_KEYS = namedtuple("ZF_KEYS", self.ZF_DATA.keys())
         self.KEYS = self.ZF_KEYS( **{k:k for k in self.ZF_DATA.keys()} )
 
